@@ -7,12 +7,9 @@ import airplanePkg.Airport;
  */
 
 
-//Testing Git
-
 public class Airline {
     public static void main(String[] args) {
 
-        //testing git again
         Airport aPort = new Airport();
     }
 }
