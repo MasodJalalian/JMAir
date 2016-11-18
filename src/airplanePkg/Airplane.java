@@ -6,7 +6,7 @@ import java.util.TimerTask;
 
 /**
  * Created by Jimmy on 2016-10-26.
- * Modified 31 Oct, 1st Nov
+ * Modified 31 Oct, 1st Nov, 18th of Nov
  */
 public class Airplane extends TimerTask implements Runnable{//extends Thread?
     private ArrayList<Seat> seats = new ArrayList<Seat>(10);
@@ -26,11 +26,7 @@ public class Airplane extends TimerTask implements Runnable{//extends Thread?
     //private String asteriskUtskrift = "";
 
     public Airplane(){
-        //seats 1-5 = first class
-        //seats 6-10 = economy class
-
         fillPassengersOnPlane();
-        //seat[0]
     }
 
     public Airplane(String destination){
@@ -38,6 +34,14 @@ public class Airplane extends TimerTask implements Runnable{//extends Thread?
         if(destination.equals("London") == false){
             fillPassengersOnPlane();
         }
+    }
+
+    public Airplane(boolean dummyValue){//bara för o ha tredje konstruktor där passagerare fylls på
+        //seats 1-5 = first class
+        //seats 6-10 = economy class
+
+        fillPassengersOnPlane();
+        //seat[0]
     }
 
     //Masods konstruktor
