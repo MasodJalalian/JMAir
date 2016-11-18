@@ -26,7 +26,7 @@ public class Airplane extends TimerTask implements Runnable{//extends Thread?
     //private String asteriskUtskrift = "";
 
     public Airplane(){
-        fillPassengersOnPlane();
+
     }
 
     public Airplane(String destination){
