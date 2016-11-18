@@ -1,93 +1,104 @@
 package airplanePkg;
 
+import servicesPkg.FlyingPrintClass;
+
+import java.util.Timer;
+
 /**
  * Created by Jimmy on 2016-10-31.
+ * Updated 16th nov
  */
-public class Airport {//implements Runnable{//kanske inte runnable
-
+public class Airport {
     Airplane[] plane = new Airplane[4];
     String name = "Arlanda";
     String airportCode = "ARN";
-// Masods constructor
-//    public Airport(Airplane[] plane) {
-//        this.plane = plane;
-//    }
+    Timer timer = new Timer();
 
-    public Airport() {
-        startPlanes("");
+
+    public Airport(){
+        startPlanes("", true);
     }
 
-    public Airport(String dest) {
-        startPlanes(dest);
+    public Airport(String dest){
+        startPlanes(dest, true);
     }
 
-    public Airplane[] getPlane() {
-        return plane;
-    }
-
-    public void setPlane(Airplane[] plane) {
-        this.plane = plane;
-    }
-
-    public void startPlanes(String destinationAlreadyUsed) {
-        if (destinationAlreadyUsed.equals("") == true) {
-
+    public Airport(Airplane[] planes){
+        for (Airplane plane: planes) {
+            startPlanes(plane.getDestination(), false);//plane
         }
+    }
 
-        for (int i = 0; i < 4; i++) {
-            boolean takeOffPlane = true;
-            if (i == 0 & destinationAlreadyUsed.equals("Rome") == false) {
-                plane[i] = new Airplane("Rome");
-                //plane[i].setDestination("Rome");
+    public void startPlanes(String destinationAlreadyUsed, boolean startOtherPlanes){
+        if (destinationAlreadyUsed.equals("") == true){//if a new airport is created without any argument
+            for(int i = 0; i < 4; i++){
+                if (i == 0) {
+                    plane[i] = new Airplane("Rome");
+                }
+                else if (i == 1){
+                    plane[i] = new Airplane("Paris");
+                }
+                else if (i == 2){
+                    plane[i] = new Airplane("London");
+                    plane[i].fillPassengersWithRealPeople();
+                }
+                else if (i == 3){
+                    plane[i] = new Airplane("Miami");
+                }
 
-                /*Thread planeThread = new Thread(plane[0]);
-                System.out.println();
-                plane[0].printPassengerList();
-                //System.out.println();
-                planeThread.start();*/
-            } else if (i == 1 & destinationAlreadyUsed.equals("Paris") == false) {
-                plane[i] = new Airplane("Paris");
-                //plane[i].setDestination("Paris");
-            } else if (i == 2 & destinationAlreadyUsed.equalsIgnoreCase("London") == false) {
-                plane[i] = new Airplane("London");
-                //plane[i].setDestination("London");
-                plane[i].fillPassengersWithRealPeople();
-            } else if (i == 3 & destinationAlreadyUsed.equals("Miami") == false) {
-                plane[i] = new Airplane("Miami");
-                //plane[i].setDestination("Miami");
-            } else {
-                takeOffPlane = false;
-            }
-
-            if (takeOffPlane == true) {
                 Thread planeThread = new Thread(plane[i]);
                 System.out.println();
                 plane[i].printPassengerList();
-                //System.out.println();
                 planeThread.start();
             }
         }
 
-        /*Thread planeThread2 = new Thread(plane[1]);
-        System.out.println();
-        plane[1].printPassengerList();
-        //System.out.println();
-        planeThread2.start();
+        if(startOtherPlanes == false){ //takeoff one plane
+            Airplane p = new Airplane(destinationAlreadyUsed);
+            Thread planeThread = new Thread(p);
+            System.out.println();
+            p.printPassengerList();
+            planeThread.start();
+        }
+        else{//takeoff all 4 planes
+            FlyingPrintClass fpc = new FlyingPrintClass(destinationAlreadyUsed);
+            for(int i = 0; i < 4; i++){
+                boolean takeOffPlane = true;
+                if (i == 0 & destinationAlreadyUsed.equalsIgnoreCase("Rome") == false) {
+                    plane[i] = new Airplane("Rome");
+                }
+                else if (i == 1 & destinationAlreadyUsed.equalsIgnoreCase("Paris") == false) {
+                    plane[i] = new Airplane("Paris");
+                }
+                else if (i == 2 & destinationAlreadyUsed.equalsIgnoreCase("London") == false) {
+                    plane[i] = new Airplane("London");
+                    plane[i].fillPassengersWithRealPeople();
+                }
+                else if (i == 3 & destinationAlreadyUsed.equalsIgnoreCase("Miami") == false) {
+                    plane[i] = new Airplane("Miami");
+                }
+                else {
+                    takeOffPlane = false;
+                }
 
-        Thread planeThread3 = new Thread(plane[2]);
-        System.out.println();
-        plane[2].printPassengerList();
-        //System.out.println();
-        planeThread3.start();
-
-        Thread planeThread4 = new Thread(plane[3]);
-        System.out.println();
-        plane[3].printPassengerList();
-        System.out.println();
-        planeThread4.start();*/
+                if(takeOffPlane == true){
+                    Thread planeThread = new Thread(plane[i]);
+                    System.out.println();
+                    plane[i].printPassengerList();
+                    if (i > 0){
+                        if (plane[i-1].isInTheAir() == true) {
+                            planeThread.start();
+                            //System.out.println("Plane " + plane[i-1] + " is in the air? " + plane[i-1].isInTheAir());
+                        }
+                    }
+                    for (int j = 0; j <= i; j++) {
+                        System.out.println("Plane " + plane[j] + " is in the air? " + plane[j].isInTheAir());
+                        timer.schedule(fpc, 0, 1000);//bara en gång
+                        timer.cancel();//när den kört 47 s från start
+                    }
+                    //planeThread.start();
+                }
+            }
+        }
     }
-    /*@Override
-    public void run(){
-
-    }*/
 }
