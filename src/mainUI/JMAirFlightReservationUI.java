@@ -60,11 +60,11 @@ public class JMAirFlightReservationUI {
         return 4; // wrong destination
     }
 
-    //också ny metod från Masod//"static" borttaget
-    public Seat createASeat(Airplane[] airplanes, int noOfPlane, int businessOrEconomiSeatsNo,
+    public Seat createASeat(Airplane[] airplanes, int businessOrEconomiSeatsNo,
             int[][] availableBusinussSeats, int[][] availableEconomySeats) {
         Seat seat = new Seat(businessOrEconomiSeatsNo);
         seat.setBooked(true);
+        int noOfPlane = 0;
 
         if (airplanes[noOfPlane].getDestination().equalsIgnoreCase("London")) {
             noOfPlane = 0;
@@ -190,10 +190,11 @@ public class JMAirFlightReservationUI {
         return foodCosts;
     }
 
-    public int chooseASeat(Airplane[] airplanes, int noOfPlane, int businessOrEconomi,//int noOfPlane kan tas bort
+    public int chooseASeat(Airplane[] airplanes, int businessOrEconomi,
             int[][] availableBusinussSeats, int[][] availableEconomySeats) {
         String businessOrEconomiSeatsNo = null;
         int[] zeroArray = {0, 0, 0, 0, 0};
+        int noOfPlane = 0;
 
         if (airplanes[noOfPlane].getDestination().equalsIgnoreCase("London")) {
             noOfPlane = 0;
@@ -327,12 +328,12 @@ public class JMAirFlightReservationUI {
         //airPlane.addSeat(next);
     // jag hade kommenterat bort 17/11 Masod
 
-    Passenger p = new Passenger(firstName, surname, totalTicketPrice, seat.getSeatNumber(), airPlanes[noOfPlane].getDestination(), age);
-    seat.setPassenger(p);
+        Passenger p = new Passenger(firstName, surname, totalTicketPrice, seat.getSeatNumber(), airPlanes[noOfPlane].getDestination(), age);
+        seat.setPassenger(p);
 //dessa är mina. Hade dom i början förut
         //       Passenger p = new Passenger(fNamn, eNamn, totP, next.getSeatNumber(), airPlane.getDestination(), 38);//"Sydney" // varför så här?
         airPlanes[noOfPlane].addSeatAndPass(seat, p);//min nya. Här har jag problem..... 17/11 Masod
-    return airPlanes;
+        return airPlanes;
     }
 
     public boolean readyToFly(Airplane[] airplanes) {
