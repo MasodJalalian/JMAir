@@ -17,67 +17,40 @@ public class JMAirFlightReservationMainUI {
 
     public static Scanner sc = new Scanner(System.in);
 
-    //la jag till. Blev dåligt med static
+    //la jag(Jimmy) till. Blev dåligt med static
     private String fNamn;//static
     private String eNamn;//static
     private int totP;//static
 
-    //lägger jag till 3:e nov
+    //lägger jag(Jimmy) till 3:e nov
     private Airplane ap;
     //private JMAirFlightReservationMainUI ui;
 
     public static void main(String[] args) {
 
-        //System.out.println("Welcome to JM airline flight reservation.");//borttagen i Masods nya
-
-        //ArrayList<Seat> seats = new ArrayList<>();//borttagen i Masods nya. Båda dessa i createASeat
-        //Airplane airPlane = createADestination(); //ändrade Masod till //new Airplane(seats)
-
-        //mina tillägg
-        //ap = new Airplane(seats);//la jag till men kanske onödig
         JMAirFlightReservationMainUI ui = new JMAirFlightReservationMainUI();
-        ui.ap = ui.createADestination();//"ui." tillagt
+        ui.ap = ui.createADestination();
 
         int[] availableBusinussSeats = {1, 2, 3, 4, 5};
         int[] availableEconomySeats = {6, 7, 8, 9, 10};
-        
-  //     boolean isReadyToFly = false;
-  
+
         // The plane is ready to fly when you booked for 5 seats Business and 5 seats Economy.
         while (!Airplane.isReadyToFly) {
 
-            int businessOrEconomi = ui.chooseFlightClass(); // Return 1 as BUSINESS or 2 as ECONOMY.//"ui." tillagt
+            int businessOrEconomi = ui.chooseFlightClass(); // Return 1 as BUSINESS or 2 as ECONOMY.
 
             // Return BUSINUSS or ECONOMY Seats number.
             int businessOrEconomiSeatsNo = ui.chooseASeat(businessOrEconomi, ui.ap, availableBusinussSeats, availableEconomySeats);
-            //airPlane//"ui." tillagt
 
             // seat no 1-5 Business & 6-10 Economy
             if (businessOrEconomiSeatsNo != 0) {// seat no = 0 The customer has repented booking flights.
-                //Seat seat = new Seat(businessOrEconomiSeatsNo);//passagerare också(för mina)
-                //masod ändra till detta:
                 Seat seat = ui.createASeat(businessOrEconomiSeatsNo, availableBusinussSeats, availableEconomySeats);
-                //"ui." borttaget
-
-                //Masod tar nu bort dessa:
-                /*seat.setBooked(true);
-                if (businessOrEconomiSeatsNo < 6) {
-                    seat.setClassStatus(ClassType.BUSINESS);
-                    availableBusinussSeats[businessOrEconomiSeatsNo - 1] = 0;
-                } else {
-                    seat.setClassStatus(ClassType.ECONOMY);
-                    availableEconomySeats[businessOrEconomiSeatsNo - 5 - 1] = 0;
-                }*/
-                //till hit
 
                 // Order the fodd to have onboard.
-                int foodCosts = orderFood(seat);//denna behöll Masod
+                int foodCosts = orderFood(seat);
 
                 // Print out the ticket.
-                ui.doPrintTicket(ui.ap, seat, foodCosts);//denna behöll Masod också//airPlane//"ui." tillagt
-                //slut på if-en här i Masods nya
-
-                //jag flyttar nu mina rader här till näst sista metoden där Masod gör addSeat(doPrintTicket)
+                ui.doPrintTicket(ui.ap, seat, foodCosts);
 
                 //min kommentar: skapa passagerare här med tillgänglig info? och skicka till seat o airplane?
                 //så man kan lägga till
@@ -85,49 +58,20 @@ public class JMAirFlightReservationMainUI {
                 //Passenger p = new Passenger(fNamn, eNamn, totP, seat.getSeatNumber(), "Sydney", 38);
 
                 //behöver också flytta till andra klasser
-                //funktion för att fylla i övriga passagerare?
-
-                /*seat.setPassenger(p);//min tror jag
-                airPlane.addSeat(seat);//returnerar arraylist med säten. Masod hade denna.
-                airPlane.addSeatAndPass(seat, p);//min nya*/
-
             }
 
-            //Masod la här till denna rad och har inte if-satsen under(kommenterade):
-            Airplane.isReadyToFly = ui.readyToFly(ui.ap);//airPlane);
-            //lägger till if-sats för att kolla isReadyToFly och flyga
+            Airplane.isReadyToFly = ui.readyToFly(ui.ap);
             if(Airplane.isReadyToFly == true){
-                //airPlane.setDestination("Sydney");
-                Thread planeThread = new Thread(ui.ap);//airPlane);
-                ui.ap.printPassengerList();//airPlane
+                Thread planeThread = new Thread(ui.ap);
+                ui.ap.printPassengerList();
                 planeThread.start();
 
-                //mitt tillägg också för att starta ytterliggare 4 plan via airport
-                //Airport aPort = new Airport();
                 Airport aPortWDest = new Airport(ui.ap.getDestination());
             }
-            //gör funktion för o fylla i alla andra passagerare
-
-            /*if (airPlane.getBusinessSeats() == 0 && airPlane.getEconomiSeats() == 0) {
-
-                System.out.println("Please check in and go onboard.");
-                System.out.println("Now this plane is ready to fly.");
-                Airplane.isReadyToFly = true;
-
-                //mina tillägg
-                airPlane.setDestination("Sydney");
-                Thread planeThread = new Thread(airPlane);
-                airPlane.printPassengerList();
-                planeThread.start();
-
-                //mitt tillägg också för att starta ytterliggare 4 plan via airport
-                Airport aPort = new Airport();
-            }*/
         }
     }
 
-    //ny metod Masod skapat
-    public  Airplane createADestination() {//static
+    public  Airplane createADestination() {
 
         System.out.println("Welcome to JM airline flight reservation.");
         System.out.println("Please choose and then write your flight destination among the below list and the press Enter");
@@ -137,15 +81,14 @@ public class JMAirFlightReservationMainUI {
 
         String dest = "";
         do {
-            System.out.println("London Paris Rome Miami");//siffror
-            dest = sc.nextLine();//kör objektet och setDestination //Airplane.destination
-        } while (!dest.equalsIgnoreCase("London"));//Airplane.destination
-        airPlane.setDestination(dest);//"London");//Airplane.destination= "London"
+            System.out.println("London Paris Rome Miami");
+            dest = sc.nextLine();
+        } while (!dest.equalsIgnoreCase("London"));
+        airPlane.setDestination(dest);
         return airPlane;
     }
 
-    //också ny metod från Masod//"static" borttaget
-    public  Seat createASeat(int businessOrEconomiSeatsNo, int[] availableBusinussSeats, int[] availableEconomySeats) {
+    public Seat createASeat(int businessOrEconomiSeatsNo, int[] availableBusinussSeats, int[] availableEconomySeats) {
         Seat seat = new Seat(businessOrEconomiSeatsNo);
         seat.setBooked(true);
         if (businessOrEconomiSeatsNo < 6) {
@@ -158,7 +101,7 @@ public class JMAirFlightReservationMainUI {
         return seat;
     }
 
-    public  int chooseFlightClass() {//static
+    public int chooseFlightClass() {
         String businessClass = "1";
         String economyClass = "2";
         String businessOrEconomiToString = null;
@@ -173,7 +116,6 @@ public class JMAirFlightReservationMainUI {
     }
 
     public static int orderFood(Seat seat) {
-        //Masod la till dessa rader:
         String yesOrNoOrderFood;
         do {
             System.out.println("If you would you like to order food and drink to have onboard, please enter YES and press Enter, "
@@ -184,7 +126,6 @@ public class JMAirFlightReservationMainUI {
         if (yesOrNoOrderFood.equalsIgnoreCase("No")) {
             return 0;
         }
-        //hit
 
         System.out.println("Now you are able to order food and drink to eat on board as:");
         String amountOfThisRow;
@@ -194,17 +135,14 @@ public class JMAirFlightReservationMainUI {
         FoodAmountStorage foodAmountStorage = new FoodAmountStorage();
         switch (seat.getClassStatus()) {
             case BUSINESS:
-                //här har Masod nu:
                 for (FoodItem foodItem : foodAmountStorage.foodStorage) {
                         if (foodItem.getCustomerClass().equals(ClassType.BUSINESS)) {
                             System.out.println(++nextRowInFoodList + "- " + foodItem);
                     }
                 }
-                //* print här, den i do nu
 
                 System.out.println("Please enter your desired amount of this food item (max 3) and enter, otherwise enter 0 and then press enter");
 
-                //här har nu Masod:
                 for (int i = 0; i < 5; i++) {
                     do {
                         System.out.print(i + 1 + "- ");
@@ -219,24 +157,19 @@ public class JMAirFlightReservationMainUI {
                             foodAmountStorage.foodStorage.get(i).getPrice(),
                             foodAmountStorage.foodStorage.get(i).getCustomerClass(),
                             Integer.parseUnsignedInt(amountOfThisRow));
-                    //seat.foodItemAmounts.add(foodItemAmount);//kommenterar denna nu
-                    seat.addFoodItemAmount(foodItemAmount);//gör så här istället
+                    seat.addFoodItemAmount(foodItemAmount);
                     foodCosts += Integer.parseUnsignedInt(amountOfThisRow) * foodAmountStorage.foodStorage.get(i).getPrice();
                 }
                 break;
             case ECONOMY:
-                    //likadant här som i business men "i + 5" istället för i
-
                 for (FoodItem foodItem : foodAmountStorage.foodStorage) {
                     if (foodItem.getCustomerClass().equals(ClassType.BUSINESS)) {
                         System.out.println(++nextRowInFoodList + "- " + foodItem);
                     }
                 }
-                //* print här, den i do nu
 
                 System.out.println("Please enter your desired amount of this food item (max 3) and enter, otherwise enter 0 and then press enter");
 
-                //här har nu Masod:
                 for (int i = 0; i < 5; i++) {
                     do {
                         System.out.print(i + 1 + "- ");
@@ -251,7 +184,6 @@ public class JMAirFlightReservationMainUI {
                             foodAmountStorage.foodStorage.get(i + 5).getPrice(),
                             foodAmountStorage.foodStorage.get(i + 5).getCustomerClass(),
                             Integer.parseUnsignedInt(amountOfThisRow));
-                    //seat.foodItemAmounts.add(foodItemAmount);
                     seat.addFoodItemAmount(foodItemAmount);
                     foodCosts += Integer.parseUnsignedInt(amountOfThisRow) * foodAmountStorage.foodStorage.get(i + 5).getPrice();
                 }
@@ -261,8 +193,7 @@ public class JMAirFlightReservationMainUI {
         return foodCosts;
     }
 
-    //static
-    public  int chooseASeat(int businessOrEconomi, Airplane airPlane, int[] availableBusinussSeats, int[] availableEconomySeats) {
+    public int chooseASeat(int businessOrEconomi, Airplane airPlane, int[] availableBusinussSeats, int[] availableEconomySeats) {
         String businessOrEconomiSeatsNo = null;
         int[] zeroArray = {0, 0, 0, 0, 0};
         if (businessOrEconomi == 1 && Arrays.equals(availableBusinussSeats, zeroArray)) {
@@ -340,22 +271,19 @@ public class JMAirFlightReservationMainUI {
         return Integer.parseUnsignedInt(businessOrEconomiSeatsNo);
     }
 
-    public  void doPrintTicket(Airplane airPlane, Seat seat, int foodCosts) {//static
+    public void doPrintTicket(Airplane airPlane, Seat seat, int foodCosts) {
         System.out.println("Please enter your firstname");
         String firstName = sc.next();
-        fNamn = firstName;//la jag till
+        fNamn = firstName;
 
         System.out.println("Please enter your surname");
         String surname = sc.next();
-        eNamn = surname;//la jag till
+        eNamn = surname;
 
         System.out.println("\nPASSENGER TICKET INFORMATION:");
         System.out.println("Welcome onboard dear " + firstName + " " + surname);
-        //System.out.println("You booked " + seat.getClassStatus()
-          //      + " class and your seat nnmber is " + seat.getSeatNumber());
-        //AirPlane.destination hade han nedan
         System.out.println("Your destination is " + airPlane.getDestination() + ". You booked " + seat.getClassStatus()
-                + " class and your seat nnmber is " + seat.getSeatNumber());//nu
+                + " class and your seat nnmber is " + seat.getSeatNumber());
         System.out.println("You ordered food and drink for " + foodCosts + " SEK");
         int totalTicketPrice;
         if (seat.getClassStatus().equals(ClassType.BUSINESS)) {
@@ -365,22 +293,18 @@ public class JMAirFlightReservationMainUI {
             totalTicketPrice = foodCosts + 5000;
             airPlane.setEconomiSeats(airPlane.getEconomiSeats() - 1);
         }
-        totP = totalTicketPrice;//la jag till
+        totP = totalTicketPrice;
         System.out.println("Your total ticket price is " + totalTicketPrice + " SEK \n");
 
-        //här har nu Masod:
         Airplane.totalTicketSales += totalTicketPrice;
-        //airPlane.addSeat(seat);
 
-        //dessa är mina. Hade dom i början förut
-        Passenger p = new Passenger(fNamn, eNamn, totP, seat.getSeatNumber(), airPlane.getDestination(), 38);//"Sydney"
-        seat.setPassenger(p);//min tror jag
-        airPlane.addSeat(seat);//returnerar arraylist med säten. Masod hade denna.
-        airPlane.addSeatAndPass(seat, p);//min nya
+        Passenger p = new Passenger(fNamn, eNamn, totP, seat.getSeatNumber(), airPlane.getDestination(), 38);
+        seat.setPassenger(p);
+        airPlane.addSeat(seat);
+        airPlane.addSeatAndPass(seat, p);
     }
 
-    //dessa 2 metoder har Masod lagt till nu:
-    public  boolean readyToFly(Airplane airPlane) {//static
+    public boolean readyToFly(Airplane airPlane) {
 
         System.out.println("\nPlease check if there are more travelers in queue to book flight. Are there? enter YES,"
                 + " otherwise enter No and then press Enter.");
@@ -396,10 +320,8 @@ public class JMAirFlightReservationMainUI {
             System.out.println("Now this plane is ready to fly.\n");
             printPassengersListAndTotalIncome(airPlane);
 
-            //lägger jag till
             System.out.println();
             System.out.println("Fills the rest of the passengers");
-            //airPlane.fillRestOfPassengersOnPlane();
             this.ap.fillRestOfPassengersOnPlane();
 
             return true;
