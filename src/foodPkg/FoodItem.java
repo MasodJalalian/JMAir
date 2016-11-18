@@ -50,7 +50,7 @@ public class FoodItem {
 
     @Override
     public String toString() {
-        return "FoodItem{" + "name=" + name + ", type=" + type + ", price=" + price + ", customerClass=" + customerClass + '}';
+        return "{name=" + name + ", type=" + type + ", price=" + price + ", class=" + customerClass + '}';
     }
     
 }

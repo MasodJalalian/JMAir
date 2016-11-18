@@ -16,7 +16,7 @@ public class FoodItemsAmount extends FoodItem{
 
     @Override
     public String toString() {
-        return "FoodItemsAmount{" + "amountofFoodItem=" + amountofFoodItem + '}';
+        return getName() + " " + getPrice() + " SEK " + amountofFoodItem + " pcs";
     }
     
 }

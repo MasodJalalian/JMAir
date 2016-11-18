@@ -1,14 +1,13 @@
-
 package foodPkg;
 
 import peoplePkg.ClassType;
-
 import java.util.ArrayList;
+import java.util.List;
 
 //Masods
 public class FoodAmountStorage {
     
-    public ArrayList<FoodItem> foodStorage = new ArrayList<>();
+    public List<FoodItem> foodStorage = new ArrayList<>();
     
     public FoodAmountStorage() {
         
