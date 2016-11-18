@@ -329,7 +329,7 @@ public class JMAirFlightReservationUI {
         airPlanes[noOfPlane].totalTicketSales += totalTicketPrice;
 //        airPlanes[noOfPlane].addSeat(next);
         //airPlane.addSeat(next);
-    // jag hade kommenterat bort 17/11 Masod
+        // jag hade kommenterat bort 17/11 Masod
 
         Passenger p = new Passenger(firstName, surname, totalTicketPrice, seat.getSeatNumber(), airPlanes[noOfPlane].getDestination(), age);
         seat.setPassenger(p);
@@ -359,8 +359,7 @@ public class JMAirFlightReservationUI {
                     next.readyToFly = true;
                 }
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
         }
@@ -370,19 +369,21 @@ public class JMAirFlightReservationUI {
     public void printPassengersListAndTotalIncome(Airplane[] airplanes) {
         int JMAirtotalTicketSales = 0;
         for (int i = 0; i < airplanes.length; i++) {
-
-            System.out.println("The Passengers List And Total Income of the flight to " + airplanes[i].getDestination() + " :");
+            if (airplanes[i].totalTicketSales != 0) {
+                System.out.println("The Passengers List And Total Income of the flight to " + airplanes[i].getDestination() + " :");
 //            ArrayList<Seat> seats = airplanes[i].getSeats();
-            for (Seat next : airplanes[i].getSeats()) {
-                if(!next.equals(null)) {
-                    System.out.println(next);
+                for (Seat next : airplanes[i].getSeats()) {
+                    if (!next.equals(null)) {
+                        System.out.println(next);
+                    }
                 }
-            }
 
-            System.out.println("\nThe total ticket sales is " + airplanes[i].totalTicketSales + " SEK");
-            System.out.println("\nThe total profit for JMairline " + airplanes[i].getDestination() + " flight is " + (int) (airplanes[i].totalTicketSales * 0.3) + " SEK\n");
-            JMAirtotalTicketSales += (int) airplanes[i].totalTicketSales * 0.3;
+                System.out.println("\nThe total ticket sales is " + airplanes[i].totalTicketSales + " SEK");
+                System.out.println("\nThe total profit for JMairline " + airplanes[i].getDestination() + " flight is " + (int) (airplanes[i].totalTicketSales * 0.3) + " SEK\n");
+                JMAirtotalTicketSales += (int) airplanes[i].totalTicketSales * 0.3;
+            }
         }
+
         System.out.println("\nThe total profit for all JMairline flights is " + JMAirtotalTicketSales + " SEK");
 
     }
