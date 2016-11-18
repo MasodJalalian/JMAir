@@ -190,8 +190,7 @@ public class JMAirFlightReservationUI {
         return foodCosts;
     }
 
-    //static
-    public int chooseASeat(Airplane[] airplanes, int noOfPlane, int businessOrEconomi,
+    public int chooseASeat(Airplane[] airplanes, int noOfPlane, int businessOrEconomi,//int noOfPlane kan tas bort
             int[][] availableBusinussSeats, int[][] availableEconomySeats) {
         String businessOrEconomiSeatsNo = null;
         int[] zeroArray = {0, 0, 0, 0, 0};
@@ -260,7 +259,7 @@ public class JMAirFlightReservationUI {
                             System.out.print(availableBusinussSeats[noOfPlane][i] + ", ");
                         }
                     }
-                    System.out.println("So type your favorit one and then press <Enter>");
+                    System.out.println("So type your favourite one and then press <Enter>");
                     businessOrEconomiSeatsNo = sc.nextLine();
                 } while (!businessOrEconomiSeatsNo.equals(Integer.toString(availableBusinussSeats[noOfPlane][0]))
                         && !businessOrEconomiSeatsNo.equals(Integer.toString(availableBusinussSeats[noOfPlane][1]))
@@ -273,14 +272,14 @@ public class JMAirFlightReservationUI {
 
                     System.out.print("The Economy class seats no are 6, 7, 8, 9 and 10.");
                     System.out.println("Now you are able to choose among the available one/ones as below."
-                            + " So type your favorit one and then press <Enter>");
+                            + " So type your favourite one and then press <Enter>");
                     for (int i = 0; i < 5; i++) {
                         if (availableEconomySeats[0][i] != 0) {
                             System.out.print(availableEconomySeats[0][i] + ", ");
                         }
                     }
 
-                    System.out.println("So type your favorit one and then press <Enter>");
+                    System.out.println("So type your favourite one and then press <Enter>");
                     businessOrEconomiSeatsNo = sc.nextLine();
                 } while (!businessOrEconomiSeatsNo.equals(Integer.toString(availableEconomySeats[noOfPlane][0]))
                         && !businessOrEconomiSeatsNo.equals(Integer.toString(availableEconomySeats[noOfPlane][1]))
@@ -292,7 +291,7 @@ public class JMAirFlightReservationUI {
         return Integer.parseUnsignedInt(businessOrEconomiSeatsNo);
     }
 
-    public Airplane[] doPrintTicket(Airplane[] airPlanes, int noOfPlane, Seat seat, int foodCosts) {//static
+    public Airplane[] doPrintTicket(Airplane[] airPlanes, int noOfPlane, Seat seat, int foodCosts) {
         System.out.println("Please type your firstname");
         String firstName = sc.next();
 
@@ -336,8 +335,7 @@ public class JMAirFlightReservationUI {
     return airPlanes;
     }
 
-    //dessa 2 metoder har Masod lagt till nu:
-    public boolean readyToFly(Airplane[] airplanes) {//static
+    public boolean readyToFly(Airplane[] airplanes) {
 
         System.out.println("\nPlease check if there are more travelers in queue to book flight. Are there? enter YES,"
                 + " otherwise enter No and then press Enter.");
@@ -354,7 +352,7 @@ public class JMAirFlightReservationUI {
                 for (Airplane next : airplanes) {
                     next.readyToFly = true;
                 }
-            return true;
+                return true;
             }
             else {
                 return false;
@@ -371,7 +369,7 @@ public class JMAirFlightReservationUI {
 //            ArrayList<Seat> seats = airplanes[i].getSeats();
             for (Seat next : airplanes[i].getSeats()) {
                 if(!next.equals(null)) {
-                System.out.println(next);
+                    System.out.println(next);
                 }
             }
 
