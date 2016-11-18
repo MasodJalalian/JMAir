@@ -1,7 +1,6 @@
 package airplanePkg;
 
 import peoplePkg.Passenger;
-
 import java.util.ArrayList;
 import java.util.TimerTask;
 
@@ -14,6 +13,7 @@ public class Airplane extends TimerTask implements Runnable{//extends Thread?
     private ArrayList<Passenger> passengers = new ArrayList<Passenger>(10);
     //Masods
     private int businessSeats = 5;
+
     private int economiSeats = 5;
     public boolean readyToFly = false;
     public int totalTicketSales = 0;
@@ -241,6 +241,12 @@ public class Airplane extends TimerTask implements Runnable{//extends Thread?
     }
 
     //Masods getters o setters
+    public void setReadyToFly(boolean readyToFly) {
+        this.readyToFly = readyToFly;
+    }
+    public boolean isReadyToFly() {
+        return readyToFly;
+    }
 
     public int getBusinessSeats() {
         return businessSeats;
