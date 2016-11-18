@@ -1,7 +1,6 @@
 package airplanePkg;
 
 import peoplePkg.Passenger;
-
 import java.util.ArrayList;
 
 /**
@@ -9,14 +8,15 @@ import java.util.ArrayList;
  * Modified 31 Oct, 1st Nov
  */
 public class Airplane implements Runnable{//extends Thread?
-    private ArrayList<Seat> seats = new ArrayList<Seat>(10);
+    private ArrayList<Seat> seats = new ArrayList<Seat>(10); 
     //ArrayList<FoodItems> foods = new ArrayList<FoodItems>(10);
     private ArrayList<Passenger> passengers = new ArrayList<Passenger>(10);//överflödig?
     //Masods
     private int businessSeats = 5;
+    
     private int economiSeats = 5;
-    public static boolean isReadyToFly = false;
-    public static int totalTicketSales = 0;
+    public boolean readyToFly = false; // tagit bort static 16/11 Masod
+    public int totalTicketSales = 0;   // tagit bort /11 Masod
 
     private boolean readyForTakeOff = false;
     private boolean inTheAir = false;
@@ -44,15 +44,16 @@ public class Airplane implements Runnable{//extends Thread?
     }
 
     //Masods metod
-    public ArrayList<Seat> addSeat(Seat seat) {
-        seats.add(seat);//seats.add(
-        return seats;
-    }
+//    public void addSeat(Seat seat) {//ArrayList<Seat>
+//        seats.add(seat);//seats.add(
+//        //return seats;
+//    }
 
     //Min variant på Masods metod
     public void addSeatAndPass(Seat seat, Passenger p) {
-        seats.add(seat);//seats.add(
-        passengers.add(p);
+        seats.add(seat);//seats.add(                    !!?? En gång Masod har seats.add(seat) metod och sen addar du en gång till!? 16/11
+    // Jag behöver min addSeat(seat) metod. Än så länge har jag kommenterat bort din add(seat) metod här ovan. 17/11 Masod   
+    passengers.add(p);
     }
 
     public void takeOff(){
@@ -218,7 +219,7 @@ public class Airplane implements Runnable{//extends Thread?
                     seats.add(i, new Seat(i + 1, nyP));
                 }
             }
-            else{
+            else{//to avoid null pointer exception
                 Passenger nyP = new Passenger();
                 nyP.setFirstName("Passenger");
                 nyP.setLastName("Unnamed" + i);
@@ -239,6 +240,12 @@ public class Airplane implements Runnable{//extends Thread?
     }
 
     //Masods getters o setters
+    public void setReadyToFly(boolean readyToFly) {
+        this.readyToFly = readyToFly;
+    }
+    public boolean isReadyToFly() {
+        return readyToFly;
+    }
 
     public int getBusinessSeats() {
         return businessSeats;
