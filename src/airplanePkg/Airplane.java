@@ -76,8 +76,8 @@ public class Airplane extends TimerTask implements Runnable{//extends Thread?
     }
 
     @Override
-    public void run(){//extends TimerTask
-        /*if(isInTheAir() == true){//kanske inte ska ha detta
+    public void run(){//extends TimerTask //Detta är inte klart, men ska försöka få klart utskriften
+        /*if(isInTheAir() == true){//kanske inte ska ha detta.
             asteriskUtskrift = asteriskUtskrift + "*";
             System.out.println("Plane to " + getDestination() + " is flying " + asteriskUtskrift);
         }
