@@ -73,20 +73,32 @@ public class Seat {
         foodItemAmounts.add(foodItemAmount);
     }
 
-    //Masods toString()
-    @Override
-    public String toString() {
-        return "Seat{" + "classStatus=" + classStatus + ", seatNumber=" + seatNumber + ", booked=" + booked + ", foodItemAmounts=" + foodItemAmounts + '}';
-    }
-
     //Masods getters o setters
     public boolean isBooked() {
         return booked;
     }
-
+    
     public void setBooked(boolean booked) {
         this.booked = booked;
     }
+    
+    //Masods toString()
+    @Override
+    public String toString() {
+        String passengerInfo;
+        passengerInfo =  "{" + passenger.getFirstName() + " " + passenger.getLastName() +
+                " " + passenger.getAge() + " is traveling to " + passenger.getDestination() +
+                " seat no:" + passenger.getSeatNr() + " " + classStatus + " class, total ticket price " +
+                passenger.getTicketPrice() + " SEK with foodItems=";
+        if(foodItemAmounts.isEmpty()) {
+            passengerInfo += "0}";
+            
+        } else {
+             passengerInfo += foodItemAmounts + "}";
+        }
+        return passengerInfo;
+    }
+
 
     public ClassType getClassStatus() {
         return classStatus;
