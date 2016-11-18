@@ -14,13 +14,6 @@ import java.util.Scanner;
 public class JMAirFlightReservationUI {
 
     public static Scanner sc = new Scanner(System.in);
-    //la jag till. Blev dåligt med static
-//    private String fNamn;//static                       // onödig!? Jimmy!?  Masod 15/11-16
-//    private String eNamn;//static                       // onödig!?
-//    private int totP;//static                           // onödig!?
-    //lägger jag till 3:e nov
-//    private Airport airport;
-    //private JMAirFlightReservationUI ui;
     public static int[][] availableBusinussSeats = {{1, 2, 3, 4, 5}, {1, 2, 3, 4, 5}, {1, 2, 3, 4, 5}, {1, 2, 3, 4, 5}};
     public static int[][] availableEconomySeats = {{6, 7, 8, 9, 10}, {6, 7, 8, 9, 10}, {6, 7, 8, 9, 10}, {6, 7, 8, 9, 10}};
 
