@@ -24,14 +24,14 @@ public static void main(String[] args) {
                 int businessOrEconomi = userInterface.chooseFlightClass(); // Return 1 as BUSINESS or 2 as ECONOMY.
                 
                 // Return BUSINUSS or ECONOMY Seats number 1-10.
-                int businessOrEconomiSeatsNo = userInterface.chooseASeat(airplanes, noOfPlane, businessOrEconomi,  
+                int businessOrEconomiSeatsNo = userInterface.chooseASeat(airplanes, businessOrEconomi, //, noOfPlane
                         availableBusinussSeats, availableEconomySeats);
                 
                 if (businessOrEconomiSeatsNo != 0 && businessOrEconomiSeatsNo != 11) {
                     // seat no = 0 The customer has repented booking flights.                
                     // seat no = 11 = Both the Business and Economy class seats are already full booked.
                     
-                    Seat seat = userInterface.createASeat(airplanes, noOfPlane, businessOrEconomiSeatsNo, 
+                    Seat seat = userInterface.createASeat(airplanes, businessOrEconomiSeatsNo, //, noOfPlane
                             availableBusinussSeats, availableEconomySeats);
                     
                     // Order the food to have onboard.

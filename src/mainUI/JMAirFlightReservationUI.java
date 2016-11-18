@@ -64,11 +64,11 @@ public class JMAirFlightReservationUI {
         return 4; // wrong destination
     }
 
-    //också ny metod från Masod//"static" borttaget
-    public Seat createASeat(Airplane[] airplanes, int noOfPlane, int businessOrEconomiSeatsNo,
+    public Seat createASeat(Airplane[] airplanes, int businessOrEconomiSeatsNo,
             int[][] availableBusinussSeats, int[][] availableEconomySeats) {
         Seat seat = new Seat(businessOrEconomiSeatsNo);
         seat.setBooked(true);
+        int noOfPlane = 0;
 
         if (airplanes[noOfPlane].getDestination().equalsIgnoreCase("London")) {
             noOfPlane = 0;
@@ -194,10 +194,11 @@ public class JMAirFlightReservationUI {
         return foodCosts;
     }
 
-    public int chooseASeat(Airplane[] airplanes, int noOfPlane, int businessOrEconomi,//int noOfPlane kan tas bort
+    public int chooseASeat(Airplane[] airplanes, int businessOrEconomi,
             int[][] availableBusinussSeats, int[][] availableEconomySeats) {
         String businessOrEconomiSeatsNo = null;
         int[] zeroArray = {0, 0, 0, 0, 0};
+        int noOfPlane = 0;
 
         if (airplanes[noOfPlane].getDestination().equalsIgnoreCase("London")) {
             noOfPlane = 0;
@@ -311,7 +312,7 @@ public class JMAirFlightReservationUI {
         System.out.println("Welcome onboard dear " + firstName + " " + surname + ", " + age);
         //System.out.println("You booked " + next.getClassStatus()
         //      + " class and your next nnmber is " + next.getSeatNumber());
-        //AirPlane.destination hade han nedan
+
         System.out.println("Your destination is " + airPlanes[noOfPlane].getDestination() + ". You booked " + seat.getClassStatus()
                 + " class and your seat nnmber is " + seat.getSeatNumber());//nu
         System.out.println("You ordered food and drink for " + foodCosts + " SEK");
@@ -325,18 +326,17 @@ public class JMAirFlightReservationUI {
         }
 //        totP = totalTicketPrice;//la jag till
         System.out.println("Your total ticket price is " + totalTicketPrice + " SEK");
-        //här har nu Masod:
         airPlanes[noOfPlane].totalTicketSales += totalTicketPrice;
 //        airPlanes[noOfPlane].addSeat(next);
         //airPlane.addSeat(next);
     // jag hade kommenterat bort 17/11 Masod
 
-    Passenger p = new Passenger(firstName, surname, totalTicketPrice, seat.getSeatNumber(), airPlanes[noOfPlane].getDestination(), age);
-    seat.setPassenger(p);
+        Passenger p = new Passenger(firstName, surname, totalTicketPrice, seat.getSeatNumber(), airPlanes[noOfPlane].getDestination(), age);
+        seat.setPassenger(p);
 //dessa är mina. Hade dom i början förut
         //       Passenger p = new Passenger(fNamn, eNamn, totP, next.getSeatNumber(), airPlane.getDestination(), 38);//"Sydney" // varför så här?
         airPlanes[noOfPlane].addSeatAndPass(seat, p);//min nya. Här har jag problem..... 17/11 Masod
-    return airPlanes;
+        return airPlanes;
     }
 
     public boolean readyToFly(Airplane[] airplanes) {
@@ -353,6 +353,8 @@ public class JMAirFlightReservationUI {
                     || yesOrNoToBookFlight.equalsIgnoreCase("No")) {
                 System.out.println("Please check in and go onboard.");
                 System.out.println("Now this plane is ready to fly to " + airplanes[i].getDestination() + ".\n");
+                //airplanes[i].readyToFly = true;//la Jag(Jimmy) till
+                //Jag(Jimmy) kommenterar bort denna loop för det är nog den som gör att samma läggs till i 4 plan
                 for (Airplane next : airplanes) {
                     next.readyToFly = true;
                 }
