@@ -22,10 +22,14 @@ public class JMAirFlightReservationUI {
         ArrayList<Seat> seats = new ArrayList<>(10);
         Airplane[] airplanes = new Airplane[4];
 //       Airport airport = new Airport(planes);
-        airplanes[0] = new Airplane(seats);
-        airplanes[1] = new Airplane(seats);
-        airplanes[2] = new Airplane(seats);
-        airplanes[3] = new Airplane(seats);
+//        airplanes[0] = new Airplane(seats);
+//        airplanes[1] = new Airplane(seats);
+//        airplanes[2] = new Airplane(seats);
+//        airplanes[3] = new Airplane(seats);
+        airplanes[0] = new Airplane();
+        airplanes[1] = new Airplane();
+        airplanes[2] = new Airplane();
+        airplanes[3] = new Airplane();
 
         airplanes[0].setDestination("London");
         airplanes[1].setDestination("Paris");
