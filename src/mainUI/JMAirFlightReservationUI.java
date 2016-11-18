@@ -22,10 +22,15 @@ public class JMAirFlightReservationUI {
         ArrayList<Seat> seats = new ArrayList<>(10);
         Airplane[] airplanes = new Airplane[4];
 //       Airport airport = new Airport(planes);
-        airplanes[0] = new Airplane(seats);
+        /*airplanes[0] = new Airplane(seats);
         airplanes[1] = new Airplane(seats);
         airplanes[2] = new Airplane(seats);
-        airplanes[3] = new Airplane(seats);
+        airplanes[3] = new Airplane(seats);*/
+
+        airplanes[0] = new Airplane();
+        airplanes[1] = new Airplane();
+        airplanes[2] = new Airplane();
+        airplanes[3] = new Airplane();
 
         airplanes[0].setDestination("London");
         airplanes[1].setDestination("Paris");
@@ -308,7 +313,7 @@ public class JMAirFlightReservationUI {
         System.out.println("Welcome onboard dear " + firstName + " " + surname + ", " + age);
         //System.out.println("You booked " + next.getClassStatus()
         //      + " class and your next nnmber is " + next.getSeatNumber());
-        //AirPlane.destination hade han nedan
+
         System.out.println("Your destination is " + airPlanes[noOfPlane].getDestination() + ". You booked " + seat.getClassStatus()
                 + " class and your seat nnmber is " + seat.getSeatNumber());//nu
         System.out.println("You ordered food and drink for " + foodCosts + " SEK");
@@ -322,7 +327,6 @@ public class JMAirFlightReservationUI {
         }
 //        totP = totalTicketPrice;//la jag till
         System.out.println("Your total ticket price is " + totalTicketPrice + " SEK");
-        //här har nu Masod:
         airPlanes[noOfPlane].totalTicketSales += totalTicketPrice;
 //        airPlanes[noOfPlane].addSeat(next);
         //airPlane.addSeat(next);
@@ -350,6 +354,8 @@ public class JMAirFlightReservationUI {
                     || yesOrNoToBookFlight.equalsIgnoreCase("No")) {
                 System.out.println("Please check in and go onboard.");
                 System.out.println("Now this plane is ready to fly to " + airplanes[i].getDestination() + ".\n");
+                //airplanes[i].readyToFly = true;//la Jag(Jimmy) till
+                //Jag(Jimmy) kommenterar bort denna loop för det är nog den som gör att samma läggs till i 4 plan
                 for (Airplane next : airplanes) {
                     next.readyToFly = true;
                 }
