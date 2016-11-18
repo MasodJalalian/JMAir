@@ -4,24 +4,37 @@ package airplanePkg;
  * Created by Jimmy on 2016-10-31.
  */
 public class Airport {//implements Runnable{//kanske inte runnable
+
     Airplane[] plane = new Airplane[4];
     String name = "Arlanda";
     String airportCode = "ARN";
+// Masods constructor
+//    public Airport(Airplane[] plane) {
+//        this.plane = plane;
+//    }
 
-    public Airport(){
+    public Airport() {
         startPlanes("");
     }
 
-    public Airport(String dest){
+    public Airport(String dest) {
         startPlanes(dest);
     }
 
-    public void startPlanes(String destinationAlreadyUsed){
-        if (destinationAlreadyUsed.equals("") == true){
+    public Airplane[] getPlane() {
+        return plane;
+    }
+
+    public void setPlane(Airplane[] plane) {
+        this.plane = plane;
+    }
+
+    public void startPlanes(String destinationAlreadyUsed) {
+        if (destinationAlreadyUsed.equals("") == true) {
 
         }
 
-        for(int i = 0; i < 4; i++){
+        for (int i = 0; i < 4; i++) {
             boolean takeOffPlane = true;
             if (i == 0 & destinationAlreadyUsed.equals("Rome") == false) {
                 plane[i] = new Airplane("Rome");
@@ -32,25 +45,21 @@ public class Airport {//implements Runnable{//kanske inte runnable
                 plane[0].printPassengerList();
                 //System.out.println();
                 planeThread.start();*/
-            }
-            else if (i == 1 & destinationAlreadyUsed.equals("Paris") == false) {
+            } else if (i == 1 & destinationAlreadyUsed.equals("Paris") == false) {
                 plane[i] = new Airplane("Paris");
                 //plane[i].setDestination("Paris");
-            }
-            else if (i == 2 & destinationAlreadyUsed.equalsIgnoreCase("London") == false) {
+            } else if (i == 2 & destinationAlreadyUsed.equalsIgnoreCase("London") == false) {
                 plane[i] = new Airplane("London");
                 //plane[i].setDestination("London");
                 plane[i].fillPassengersWithRealPeople();
-            }
-            else if (i == 3 & destinationAlreadyUsed.equals("Miami") == false) {
+            } else if (i == 3 & destinationAlreadyUsed.equals("Miami") == false) {
                 plane[i] = new Airplane("Miami");
                 //plane[i].setDestination("Miami");
-            }
-            else {
+            } else {
                 takeOffPlane = false;
             }
 
-            if(takeOffPlane == true){
+            if (takeOffPlane == true) {
                 Thread planeThread = new Thread(plane[i]);
                 System.out.println();
                 plane[i].printPassengerList();
@@ -58,9 +67,6 @@ public class Airport {//implements Runnable{//kanske inte runnable
                 planeThread.start();
             }
         }
-
-
-
 
         /*Thread planeThread2 = new Thread(plane[1]);
         System.out.println();
