@@ -3,6 +3,7 @@ package mainUI;
 import static mainUI.JMAirFlightReservationUI.availableBusinussSeats;
 import static mainUI.JMAirFlightReservationUI.availableEconomySeats;
 import airplanePkg.Airplane;
+import airplanePkg.Airport;
 import airplanePkg.Seat;
 
 public class JMAirMain {    
@@ -11,7 +12,9 @@ public static void main(String[] args) {
 
         JMAirFlightReservationUI userInterface = new JMAirFlightReservationUI();
         Airplane[] airplanes = userInterface.welcomeToJMAirLine();
-        
+
+    int i = 0;//Jimmys ändring
+
          // The planes are ready to fly when you booked for 5 seats Business and 5 Economy for each, 
          // or there are not more customers in the queue.
             while ((!airplanes[0].isReadyToFly())
@@ -42,20 +45,12 @@ public static void main(String[] args) {
                 boolean readyToFly = userInterface.readyToFly(airplanes);
                 
                 if(readyToFly) {
-                    
                     userInterface.printPassengersListAndTotalIncome(airplanes);
+                    Thread planeThread = new Thread(airplanes[i]);
+                    planeThread.start();
                 }
-// kommenterat bort raderna nedan än så länge för att kunna köra utan trådar. Masod 15/11-16
 
-//                if (Airplane.readyToFly) {
-//                    Thread planeThread = new Thread(airplane);
-//                    airplane.printPassengerList();//airPlane
-//                    planeThread.start();
-//                    //mitt tillägg också för att starta ytterliggare 4 plan via airport
-//                    //Airport aPort = new Airport();
-//                    Airport aPortWDest = new Airport(airplane.getDestination());
-//                }
+                i++;
             }
- //       }
     }
 }
