@@ -3,25 +3,27 @@ package airplanePkg;
 import peoplePkg.Passenger;
 
 import java.util.ArrayList;
+import java.util.TimerTask;
 
 /**
  * Created by Jimmy on 2016-10-26.
  * Modified 31 Oct, 1st Nov
  */
-public class Airplane implements Runnable{//extends Thread?
+public class Airplane extends TimerTask implements Runnable{//extends Thread?
     private ArrayList<Seat> seats = new ArrayList<Seat>(10);
-    //ArrayList<FoodItems> foods = new ArrayList<FoodItems>(10);
-    private ArrayList<Passenger> passengers = new ArrayList<Passenger>(10);//överflödig?
+    private ArrayList<Passenger> passengers = new ArrayList<Passenger>(10);
     //Masods
     private int businessSeats = 5;
     private int economiSeats = 5;
-    public static boolean isReadyToFly = false;
-    public static int totalTicketSales = 0;
+    public boolean readyToFly = false;
+    public int totalTicketSales = 0;
 
     private boolean readyForTakeOff = false;
     private boolean inTheAir = false;
 
-    private String destination;//masod har public static här
+    private String destination;
+
+    //private String asteriskUtskrift = "";
 
     public Airplane(){
         //seats 1-5 = first class
@@ -43,15 +45,9 @@ public class Airplane implements Runnable{//extends Thread?
         this.seats = seats;
     }
 
-    //Masods metod
-    public ArrayList<Seat> addSeat(Seat seat) {
-        seats.add(seat);//seats.add(
-        return seats;
-    }
-
     //Min variant på Masods metod
     public void addSeatAndPass(Seat seat, Passenger p) {
-        seats.add(seat);//seats.add(
+        seats.add(seat);
         passengers.add(p);
     }
 
@@ -76,19 +72,27 @@ public class Airplane implements Runnable{//extends Thread?
     }
 
     @Override
-    public void run(){
-        loadPlane();
-        //printPassengerList();
-        takeOff();
-        System.out.println("Plane flies for 47 seconds");
-        try {
-            Thread.sleep(47000);//47 second flight.
-        } catch (InterruptedException e) {
-            System.out.println("Sleep interrupted in Airplane object in run() method.");
-            e.printStackTrace();
+    public void run(){//extends TimerTask
+        /*if(isInTheAir() == true){//kanske inte ska ha detta
+            asteriskUtskrift = asteriskUtskrift + "*";
+            System.out.println("Plane to " + getDestination() + " is flying " + asteriskUtskrift);
         }
-        landing();
-        checkAndRefuel();
+        else{*/
+            loadPlane();
+            //printPassengerList();
+            takeOff();
+
+            System.out.println("Plane flies for 47 seconds");
+            try {
+                Thread.sleep(47000);//47 second flight.
+            } catch (InterruptedException e) {
+                System.out.println("Sleep interrupted in Airplane object in run() method.");
+                e.printStackTrace();
+            }
+            landing();
+            checkAndRefuel();
+        //}
+
     }
 
     public boolean isReadyForTakeOff() {
@@ -141,10 +145,8 @@ public class Airplane implements Runnable{//extends Thread?
                 nyP.setTicketPrice(5300);
             }
             passengers.add(nyP);
-        //passengers.add(p1);
 
-            seats.add(i, new Seat(i + 1,nyP));//p
-            //i++;
+            seats.add(i, new Seat(i + 1,nyP));
         }
     }
 
