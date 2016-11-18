@@ -220,7 +220,7 @@ public class Airplane extends TimerTask implements Runnable{//extends Thread?
                     seats.add(i, new Seat(i + 1, nyP));
                 }
             }
-            else{
+            else{//to avoid null pointer exception
                 Passenger nyP = new Passenger();
                 nyP.setFirstName("Passenger");
                 nyP.setLastName("Unnamed" + i);
