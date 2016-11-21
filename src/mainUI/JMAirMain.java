@@ -13,8 +13,6 @@ public static void main(String[] args) {
         JMAirFlightReservationUI userInterface = new JMAirFlightReservationUI();
         Airplane[] airplanes = userInterface.welcomeToJMAirLine();
 
-    int i = 0;//Jimmys ändring
-
          // The planes are ready to fly when you booked for 5 seats Business and 5 Economy for each, 
          // or there are not more customers in the queue.
             while ((!airplanes[0].isReadyToFly())
@@ -27,14 +25,14 @@ public static void main(String[] args) {
                 int businessOrEconomi = userInterface.chooseFlightClass(); // Return 1 as BUSINESS or 2 as ECONOMY.
                 
                 // Return BUSINUSS or ECONOMY Seats number 1-10.
-                int businessOrEconomiSeatsNo = userInterface.chooseASeat(airplanes, businessOrEconomi, //, noOfPlane
+                int businessOrEconomiSeatsNo = userInterface.chooseASeat(airplanes, businessOrEconomi, noOfPlane,
                         availableBusinussSeats, availableEconomySeats);
                 
                 if (businessOrEconomiSeatsNo != 0 && businessOrEconomiSeatsNo != 11) {
                     // seat no = 0 The customer has repented booking flights.                
                     // seat no = 11 = Both the Business and Economy class seats are already full booked.
                     
-                    Seat seat = userInterface.createASeat(airplanes, businessOrEconomiSeatsNo, //, noOfPlane
+                    Seat seat = userInterface.createASeat(airplanes, businessOrEconomiSeatsNo, noOfPlane,
                             availableBusinussSeats, availableEconomySeats);
                     
                     // Order the food to have onboard.
@@ -45,12 +43,15 @@ public static void main(String[] args) {
                 boolean readyToFly = userInterface.readyToFly(airplanes);
                 
                 if(readyToFly) {
-                    userInterface.printPassengersListAndTotalIncome(airplanes);
-                    Thread planeThread = new Thread(airplanes[i]);
-                    planeThread.start();
-                }
+                    for (Airplane next : airplanes) {
+                        if(next.readyToFly == true){
+                            Thread planeThread = new Thread(next);
+                            planeThread.start();
+                        }
 
-                i++;
+                    }
+                    userInterface.printPassengersListAndTotalIncome(airplanes);
+                }
             }
     }
 }

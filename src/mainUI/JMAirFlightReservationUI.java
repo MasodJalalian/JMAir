@@ -40,6 +40,7 @@ public class JMAirFlightReservationUI {
     }
 
     public int chooseADestination(Airplane[] airplanes) { // returns London = 0, Paris = 1, Rome = 2 and Miami = 3
+        System.out.println();
         System.out.println("Please choose flight destination among the list as below:");
         System.out.println("Please type 1, 2, 3 or 4 as your wished destination and then press <Enter>");
 
@@ -64,21 +65,11 @@ public class JMAirFlightReservationUI {
         return 4; // wrong destination
     }
 
-    public Seat createASeat(Airplane[] airplanes, int businessOrEconomiSeatsNo,
+    public Seat createASeat(Airplane[] airplanes, int businessOrEconomiSeatsNo, int noOfPlane,
             int[][] availableBusinussSeats, int[][] availableEconomySeats) {
         Seat seat = new Seat(businessOrEconomiSeatsNo);
         seat.setBooked(true);
-        int noOfPlane = 0;
 
-        if (airplanes[noOfPlane].getDestination().equalsIgnoreCase("London")) {
-            noOfPlane = 0;
-        } else if (airplanes[noOfPlane].getDestination().equalsIgnoreCase("Paris")) {
-            noOfPlane = 1;
-        } else if (airplanes[noOfPlane].getDestination().equalsIgnoreCase("Rome")) {
-            noOfPlane = 2;
-        } else {
-            noOfPlane = 3;
-        }
         if (businessOrEconomiSeatsNo < 6) {
             seat.setClassStatus(ClassType.BUSINESS);
             availableBusinussSeats[noOfPlane][businessOrEconomiSeatsNo - 1] = 0;
@@ -90,10 +81,11 @@ public class JMAirFlightReservationUI {
         return seat;
     }
 
-    public int chooseFlightClass() {//static
+    public int chooseFlightClass() {
         String businessClass = "1";
         String economyClass = "2";
         String businessOrEconomiToString = null;
+        System.out.println();
         System.out.println("Please type 1 for booking Business class or 2 for Economy class and then press <Enter>");
         System.out.println("1- Business class costs 20 000 SEK");
         System.out.println("2- Economy class costs 5 000 SEK");
@@ -105,7 +97,6 @@ public class JMAirFlightReservationUI {
     }
 
     public int orderFood(Seat seat) {
-        //Masod la till dessa rader:
         String yesOrNoOrderFood;
         do {
             System.out.println("If you would like to order food and drink to have onboard, please type YES and then press <Enter> "
@@ -116,8 +107,8 @@ public class JMAirFlightReservationUI {
         if (yesOrNoOrderFood.equalsIgnoreCase("No")) {
             return 0;
         }
-        //hit
 
+        System.out.println();
         System.out.println("Now you are able to order food and drink to eat on board as:");
         String amountOfThisRow;
         int nextRowInFoodList = 0;
@@ -126,17 +117,14 @@ public class JMAirFlightReservationUI {
         FoodAmountStorage foodAmountStorage = new FoodAmountStorage();
         switch (seat.getClassStatus()) {
             case BUSINESS:
-                //här har Masod nu:
                 for (FoodItem foodItem : foodAmountStorage.foodStorage) {
                     if (foodItem.getCustomerClass().equals(ClassType.BUSINESS)) {
                         System.out.println(++nextRowInFoodList + "- " + foodItem);
                     }
                 }
-                //* print här, den i do nu
 
                 System.out.println("Please type your desired amount of this food item (max 3) and then press <Enter>, otherwise type 0 and then press <Enter>");
 
-                //här har nu Masod:
                 for (int i = 0; i < 5; i++) {
                     do {
                         System.out.print(i + 1 + "- ");
@@ -151,8 +139,7 @@ public class JMAirFlightReservationUI {
                             foodAmountStorage.foodStorage.get(i).getPrice(),
                             foodAmountStorage.foodStorage.get(i).getCustomerClass(),
                             Integer.parseUnsignedInt(amountOfThisRow));
-                    //seat.foodItemAmounts.add(foodItemAmount);//kommenterar denna nu
-                    seat.addFoodItemAmount(foodItemAmount);//gör så här istället
+                    seat.addFoodItemAmount(foodItemAmount);
                     foodCosts += Integer.parseUnsignedInt(amountOfThisRow) * foodAmountStorage.foodStorage.get(i).getPrice();
                 }
                 break;
@@ -164,7 +151,6 @@ public class JMAirFlightReservationUI {
                         System.out.println(++nextRowInFoodList + "- " + foodItem);
                     }
                 }
-                //* print här, den i do nu
 
                 System.out.println("Please type your desired amount of this food item (max 3) and then ptrss <Enter>, "
                         + "otherwise type 0 and then press <Enter>");
@@ -184,7 +170,6 @@ public class JMAirFlightReservationUI {
                             foodAmountStorage.foodStorage.get(i + 5).getPrice(),
                             foodAmountStorage.foodStorage.get(i + 5).getCustomerClass(),
                             Integer.parseUnsignedInt(amountOfThisRow));
-                    //seat.foodItemAmounts.add(foodItemAmount);
                     seat.addFoodItemAmount(foodItemAmount);
                     foodCosts += Integer.parseUnsignedInt(amountOfThisRow) * foodAmountStorage.foodStorage.get(i + 5).getPrice();
                 }
@@ -194,25 +179,16 @@ public class JMAirFlightReservationUI {
         return foodCosts;
     }
 
-    public int chooseASeat(Airplane[] airplanes, int businessOrEconomi,
+    public int chooseASeat(Airplane[] airplanes, int businessOrEconomi, int noOfPlane,
             int[][] availableBusinussSeats, int[][] availableEconomySeats) {
         String businessOrEconomiSeatsNo = null;
         int[] zeroArray = {0, 0, 0, 0, 0};
-        int noOfPlane = 0;
 
-        if (airplanes[noOfPlane].getDestination().equalsIgnoreCase("London")) {
-            noOfPlane = 0;
-        } else if (airplanes[noOfPlane].getDestination().equalsIgnoreCase("Paris")) {
-            noOfPlane = 1;
-        } else if (airplanes[noOfPlane].getDestination().equalsIgnoreCase("Rome")) {
-            noOfPlane = 2;
-        } else {
-            noOfPlane = 3;
-        }
         if (businessOrEconomi == 1 && Arrays.equals(availableBusinussSeats[noOfPlane], zeroArray)) {
             System.out.println("Unfortunately the Business class seats are already full booked.");
             String yesOrNoToBookEconomy;
             do {
+                System.out.println();
                 System.out.println("If you would like to book a Economy class instead type 'YES' and then press <Enter> "
                         + "Otherwise type 'No' and then press <Enter>");
                 yesOrNoToBookEconomy = sc.nextLine();
@@ -279,8 +255,8 @@ public class JMAirFlightReservationUI {
                     System.out.println("Now you are able to choose among the available one/ones as below."
                             + " So type your favourite one and then press <Enter>");
                     for (int i = 0; i < 5; i++) {
-                        if (availableEconomySeats[0][i] != 0) {
-                            System.out.print(availableEconomySeats[0][i] + ", ");
+                        if (availableEconomySeats[noOfPlane][i] != 0) {
+                            System.out.print(availableEconomySeats[noOfPlane][i] + ", ");
                         }
                     }
 
@@ -297,14 +273,15 @@ public class JMAirFlightReservationUI {
     }
 
     public Airplane[] doPrintTicket(Airplane[] airPlanes, int noOfPlane, Seat seat, int foodCosts) {
+        System.out.println();
         System.out.println("Please type your firstname");
         String firstName = sc.next();
 
-//        fNamn = firstName;//la jag till     // onödig!? varför har du lagt dem Jimmy?
+        System.out.println();
         System.out.println("Please type your surname");
-        String surname = sc.next();         // onödig!?
-        //       eNamn = surname;//la jag till
+        String surname = sc.next();
 
+        System.out.println();
         System.out.println("Please type your age");
         int age = sc.nextInt();
 
@@ -356,7 +333,9 @@ public class JMAirFlightReservationUI {
                 //airplanes[i].readyToFly = true;//la Jag(Jimmy) till
                 //Jag(Jimmy) kommenterar bort denna loop för det är nog den som gör att samma läggs till i 4 plan
                 for (Airplane next : airplanes) {
-                    next.readyToFly = true;
+                    if(next.getBusinessSeats() < 5 || next.getEconomiSeats() < 5){
+                        next.readyToFly = true;
+                    }
                 }
                 return true;
             }
