@@ -41,15 +41,12 @@ public class Airplane extends TimerTask implements Runnable{//extends Thread?
         //seats 6-10 = economy class
 
         fillPassengersOnPlane();
-        //seat[0]
     }
 
-    //Masods konstruktor
     public Airplane(ArrayList<Seat> seats) {
         this.seats = seats;
     }
 
-    //Min variant på Masods metod
     public void addSeatAndPass(Seat seat, Passenger p) {
         seats.add(seat);
         passengers.add(p);
