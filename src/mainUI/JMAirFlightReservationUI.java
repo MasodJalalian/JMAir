@@ -326,27 +326,22 @@ public class JMAirFlightReservationUI {
         for (int i = 0; i < airplanes.length; i++) {
             if (airplanes[i].totalTicketSales != 0) {
                 System.out.println("The Passengers List And Total Income of the flight to " + airplanes[i].getDestination() + " :");
-//            ArrayList<Seat> seats = airplanes[i].getSeats();
-                for (Seat next : airplanes[i].getSeats()) {
+
+                /*for (Seat next : airplanes[i].getSeats()) {
                     if (!next.equals(null)) {
                         System.out.println(next);
                     }
-                }
+                }*/
                 System.out.println("\nThe total ticket sales is " + airplanes[i].totalTicketSales + " SEK");
                 System.out.println("\nThe total profit for JMairline " + airplanes[i].getDestination() + " flight is " + (int) (airplanes[i].totalTicketSales * 0.3) + " SEK\n");
                 JMAirtotalTicketSales += (int) airplanes[i].totalTicketSales * 0.3;
             }
-        }
-            /*for (Seat next : airplanes[i].getSeats()) {
-                if(!next.equals(null)) {
-                    System.out.println(next);
-                }
-            }*/
+
 
             System.out.println("\nThe total ticket sales is " + airplanes[i].totalTicketSales + " SEK");
             System.out.println("\nThe total profit for JMairline " + airplanes[i].getDestination() + " flight is " + (int) (airplanes[i].totalTicketSales * 0.3) + " SEK\n");
             JMAirtotalTicketSales += (int) airplanes[i].totalTicketSales * 0.3;
-        }}
+        }
         System.out.println("\nThe total profit for all JMairline flights is " + JMAirtotalTicketSales + " SEK");
     }
 
