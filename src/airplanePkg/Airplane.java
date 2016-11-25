@@ -79,6 +79,7 @@ public class Airplane extends TimerTask implements Runnable{//extends Thread?
             System.out.println("Plane to " + getDestination() + " is flying " + asteriskUtskrift);
         }
         else{*/
+        System.out.println();
             loadPlane();
             //printPassengerList();
             takeOff();
