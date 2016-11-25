@@ -43,14 +43,16 @@ public static void main(String[] args) {
                 boolean readyToFly = userInterface.readyToFly(airplanes);
                 
                 if(readyToFly) {
+                    userInterface.printPassengersListAndTotalIncome(airplanes);
                     for (Airplane next : airplanes) {
                         if(next.readyToFly == true){
+                            next.printPassengerList();
                             Thread planeThread = new Thread(next);
                             planeThread.start();
                         }
 
                     }
-                    userInterface.printPassengersListAndTotalIncome(airplanes);
+
                 }
             }
     }
