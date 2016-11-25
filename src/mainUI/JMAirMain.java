@@ -3,7 +3,6 @@ package mainUI;
 import static mainUI.JMAirFlightReservationUI.availableBusinussSeats;
 import static mainUI.JMAirFlightReservationUI.availableEconomySeats;
 import airplanePkg.Airplane;
-import airplanePkg.Airport;
 import airplanePkg.Seat;
 
 public class JMAirMain {    
@@ -32,9 +31,8 @@ public static void main(String[] args) {
                     // seat no = 0 The customer has repented booking flights.                
                     // seat no = 11 = Both the Business and Economy class seats are already full booked.
                     
-                    Seat seat = userInterface.createASeat(airplanes, businessOrEconomiSeatsNo, noOfPlane,
-                            availableBusinussSeats, availableEconomySeats);
-                    
+                    Seat seat = userInterface.createASeat(businessOrEconomiSeatsNo, noOfPlane,
+                            availableBusinussSeats, availableEconomySeats);                   
                     // Order the food to have onboard.
                     int foodCosts = userInterface.orderFood(seat);
                     // Print out the ticket.
@@ -50,7 +48,6 @@ public static void main(String[] args) {
                             Thread planeThread = new Thread(next);
                             planeThread.start();
                         }
-
                     }
 
                 }
